@@ -1,0 +1,42 @@
+﻿@model BirthdayChecker.Models.Person
+
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Birthdate form</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/style-custom.css" />
+</head>
+<body>
+    <div class="panel panel-heading"><h4>Enter your date of birth.</h4></div>
+    <div class="panel-body" id="custom-form">
+        <form class="p-a-1" asp-action="BirthdateForm" method="post">
+            <div asp-validation-summary="All"><p id="error-header">The following fields have received incorrect input, please check the feedback below.</p></div>
+            <div class="form-group">
+                <label asp-for="Name">Name: </label>
+                <input class="form-control" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDay">Day: </label>
+                <input class="form-control" asp-for="BirthDay"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthMonth">Month: </label>
+                <input class="form-control" asp-for="BirthMonth" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthYear">Year: </label>
+                <input class="form-control" asp-for="BirthYear" />
+            </div>
+            <button class="btn btn-primary" type="submit">
+                Submit Birthdate
+            </button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿@model BirthdayChecker.Models.Person
+
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <div class="text-center">
+        <br />
+        <br />
+        <img src="~/images/HappyBirthday.png" />
+        <br />
+        <h3>It's your birthday, @Model.Name!</h3>
+        <h4>Today you've turned @ViewBag.setCurrentBirthdayAge years old!</h4>
+        <br />
+        <a asp-action="Index">Return home</a>
+    </div>
+</body>
+</html>

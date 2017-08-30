@@ -1,0 +1,22 @@
+﻿@model BirthdayChecker.Models.Person
+
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BirthdayChecker Result</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body class="text-center">
+    <div>
+        @*<img src="@Url.Content("~/images/birthdaydenied.gif")" />*@
+        <p> @Model.Name, there are @ViewBag.setDaysLeft days left until you turn @ViewBag.setAgeNextBirthday.</p>
+    
+        <a asp-action="Index">Return home</a>
+    </div>
+</body>
+</html>
