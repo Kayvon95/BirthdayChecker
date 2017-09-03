@@ -1,4 +1,4 @@
-﻿
+﻿/*Error validation for BirthdateForm.cshtml*/
 .field-validation-error {
     color: #f00;
 }
@@ -25,9 +25,12 @@
     color: #000000;
 }
 
-/*FIX FORM STYLE: LESS WIDTH, CENTERD WITHOUT CENTERING FORM CONTENT*/
 #custom-form {
     width: 100%;
     padding-left: 30vh;
     padding-right: 30vh;
+}
+
+#form-header {
+    padding-left: 30vh;
 }

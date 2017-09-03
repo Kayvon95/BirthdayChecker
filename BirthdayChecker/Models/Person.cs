@@ -8,19 +8,20 @@ namespace BirthdayChecker.Models
 {
     public class Person
     {
+        [MaxLength(32, ErrorMessage ="There is a limit of 32 characters for a name entry.")]
         [Required(ErrorMessage = "Please enter your name.")]
-        //[RegularExpression(".+\\@.+\\..+", ErrorMessage = "Please enter a valid name without numbers")]
         public String Name { get; set; }
         
         [Required(ErrorMessage = "Please enter your day of birth.")]
-        [RegularExpression("^0[0-3]|1[0-9]?", ErrorMessage = "Please enter a valid day with the format DD(DD-MM-YYYY)")]
+        [Range(1, 31, ErrorMessage = "Enter a value from 1 to 31.")]
         public int BirthDay { get; set; }
 
+        [Range(1, 12, ErrorMessage = "Please enter a a value from 1 to 12.")]
+        [Display(Name = "1-12")]
         [Required(ErrorMessage = "Please enter your month of birth.")]
-        [RegularExpression("^(0?[1-9]|1[012])$", ErrorMessage = "Please enter a valid month wth the format MM(DD-MM-YYYY)")]
         public int BirthMonth { get; set; }
 
-        [RegularExpression("^[0-9]{4}$", ErrorMessage = "Please enter your year of birth with the format YYYY(DD-MM-YYYY)")]
+        [Range(1890, 2017, ErrorMessage="Please enter a year between 1890 and 2017.")]
         [Required(ErrorMessage = "Please enter your year of birth.")]
         public int BirthYear { get; set; }
 

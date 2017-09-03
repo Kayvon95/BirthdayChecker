@@ -19,8 +19,8 @@ namespace BirthdayChecker.Controllers
 
             String date = day.ToString("D2") + "-" + month.ToString("D2") + "-" + year.ToString();
             String time = hour + ":" + minute.ToString("D2");
-            ViewBag.StateDate = date;
-            ViewBag.StateTime = time;
+            ViewBag.setDate = date;
+            ViewBag.setTime = time;
 
             return View("Home");
         }
@@ -34,45 +34,32 @@ namespace BirthdayChecker.Controllers
         [HttpPost]
         public ViewResult BirthdateForm(Person person)
         {
-            //Submitted info via model object
-            int year = person.BirthYear;
-            int month = person.BirthMonth;
-            int day = person.BirthDay;
-
-
-            DateTime Date = DateTime.Now.Date;
-            DateTime Birthdate = new DateTime(year, month, day, 7, 47, 0);
-            var nextBirthday = Birthdate.AddYears(DateTime.Today.Year - Birthdate.Year);
-
-            if (nextBirthday < DateTime.Today)
+            if (ModelState.IsValid)
             {
-                nextBirthday = nextBirthday.AddYears(1);
+                PersonLogic plogic = new PersonLogic();
+               
+                int daysleft = plogic.CalculateDaysLeft(person);
+
+                if (daysleft == 0)
+                {
+                    int currentAge= plogic.CurrentAge(person);
+
+                    ViewBag.setCurrentBirthDayAge = currentAge;
+
+                    return View("HappyBirthday", person);
+                }
+                else
+                {
+                    int AgeNextBirthday = plogic.AgeAtNextBirthday(person);
+
+                    ViewBag.setAgeNextBirthday = AgeNextBirthday;
+                    ViewBag.setDaysLeft = daysleft;
+
+                    return View("BirthdayCheckResult", person);
+                }
             }
-            var daysleft = (nextBirthday - DateTime.Today).Days;
-
-            ViewBag.setDaysLeft = daysleft;
-
-
-            int currentYear = DateTime.Now.Year;
-            int AgeNextBirthday = (currentYear - year) + 1;
-            ViewBag.setAgeNextBirthday = AgeNextBirthday;
-
-            String CurrentBirthDayAge = (currentYear - year).ToString();
-            ViewBag.setCurrentBirthdayAge = CurrentBirthDayAge;
-            
-
-            //var dateTilBDay = person.BirthDay - currentdate;
-
-            if (ModelState.IsValid && daysleft > 0 )
+            else
             {
-                PersonHolder.AddPerson(person);
-                return View("BirthdayCheckResult", person);
-
-            } else  if(ModelState.IsValid)
-            {
-                return View("HappyBirthday", person);
-            }
-            else {
                 return View();
             }
         }
